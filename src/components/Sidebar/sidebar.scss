@@ -1,0 +1,50 @@
+$bgColor: #FAFBFD;
+$focusColor: #F7542E;
+$textColor: #090F31;
+$linkColor: #9E9E9E;
+$activeLinkColor: #090F31;
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    row-gap: 122px;
+
+    .header-text-section{
+        &__title-text{
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 20px;
+            color: $textColor;
+
+            .focus-text{
+                color: $focusColor;
+            }
+        }
+    }
+
+    .links-section{
+        &__links{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            row-gap: 28px;
+
+            &__link{
+                a{
+                    color: $linkColor;
+                    text-decoration: none;
+                    text-transform: capitalize;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 20px;
+                }
+
+                .active-link{
+                    color: $activeLinkColor;
+                }
+            }
+        }
+    }
+}
