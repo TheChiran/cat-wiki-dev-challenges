@@ -3,5 +3,22 @@ $sidebarBgColor: #FAFBFD;
 .App {
     height: 100%;
 
-    .main-layout {}
+    .main-layout {
+        width: calc(100% - 192px);
+        max-width: calc(100% - 192px);
+        margin: 0 auto;
+        padding-top: 36px;
+
+        @media(max-width: 991px) {
+            width: calc(100% - 48px);
+            max-width: calc(100% - 48px);
+            padding-top: 28px;
+        }
+
+        @media(max-width: 767px) {
+            width: calc(100% - 36px);
+            max-width: calc(100% - 36px);
+            padding-top: 24px;
+        }
+    }
 }
