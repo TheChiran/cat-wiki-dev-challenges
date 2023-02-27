@@ -1,5 +1,11 @@
-export default function Header(){
+import logo from "./../../assets/CatwikiLogo.svg";
+
+import "./header.scss";
+
+export default function Header() {
     return (
-        <h2>Header Section</h2>
+        <header>
+            <img src={logo} alt="Cat Wiki Logo" />
+        </header>
     )
 }
