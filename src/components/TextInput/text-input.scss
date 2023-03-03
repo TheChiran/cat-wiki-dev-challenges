@@ -1,0 +1,36 @@
+.text-input {
+    background: #fff;
+    display: flex;
+    column-gap: 8px;
+    border-radius: 60px;
+    padding: 24px 28px;
+
+    input {
+        outline: unset;
+        border: unset;
+        width: calc(100% - 20px);
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 500;
+        font-family: 'Montserrat', sans-serif;
+        color: #291507;
+
+        &::placeholder {
+            font-size: 18px;
+            line-height: 22px;
+            font-weight: 500;
+            font-family: 'Montserrat', sans-serif;
+            color: #291507;
+        }
+    }
+
+    .material-icons {
+        cursor: pointer;
+    }
+
+    .start-icon,
+    .end-icon {
+        display: flex;
+        align-items: center;
+    }
+}
