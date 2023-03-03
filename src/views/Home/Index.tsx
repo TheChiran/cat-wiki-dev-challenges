@@ -1,5 +1,9 @@
-export default function Home(){
+import HomeBanner from "./components/Banner/Index";
+
+export default function Home() {
     return (
-        <h2>Home Page View</h2>
+        <div className="home-section">
+            <HomeBanner />
+        </div>
     )
 };
