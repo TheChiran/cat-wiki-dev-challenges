@@ -47,5 +47,15 @@
                 height: 90px;
             }
         }
+
+        @media(max-width: 1024px) {
+            top: 20px;
+        }
+    }
+
+    .search {
+        display: flex;
+        flex-direction: column;
+        row-gap: 18px;
     }
 }
