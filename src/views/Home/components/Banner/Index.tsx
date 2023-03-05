@@ -5,6 +5,7 @@ import TextInput from "../../../../components/TextInput/Index";
 
 import "./banner.scss";
 import { useState } from "react";
+import BreedSelect from "../../../../components/BreedSelect/Index";
 
 export default function HomeBanner() {
     const [searchText, setSearchText] = useState<string | undefined>();
@@ -33,6 +34,7 @@ export default function HomeBanner() {
                         onClick={onSearch}
                         onEnterPressed={onSearch}
                     />
+                    <BreedSelect />
                 </div>
             </div>
         </div>
