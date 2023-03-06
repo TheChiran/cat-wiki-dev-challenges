@@ -17,6 +17,12 @@ export default function HomeBanner() {
         console.log('search called with search value: ', searchText);
     };
 
+    const [mobileSearchOpened, setMobileSearchOpened] = useState<boolean>(false);
+
+    const toggleMobileSearchTriggered = () => {
+        setMobileSearchOpened(!mobileSearchOpened);
+    };
+
     return (
         <div className="home-banner">
             <div className="home-banner__image-wrapper">
@@ -28,13 +34,31 @@ export default function HomeBanner() {
                 </div>
                 <h2 className="title">Get to know more about your cat breed</h2>
                 <div className="search">
-                    <TextInput endIcon="search"
-                        onValueChange={onSearchTextChange}
-                        inputValue={searchText}
-                        onClick={onSearch}
-                        onEnterPressed={onSearch}
-                    />
-                    <BreedSelect />
+                    <div className="search__mbl-trigger" onClick={toggleMobileSearchTriggered}>
+                        <h2 className="title">Search</h2>
+                        <div className="material-icons">search</div>
+                    </div>
+                    <div className="search__desktop">
+                        <TextInput endIcon="search"
+                            onValueChange={onSearchTextChange}
+                            inputValue={searchText}
+                            onClick={onSearch}
+                            onEnterPressed={onSearch}
+                        />
+                        <BreedSelect />
+                    </div>
+                    <div className={`search__mobile ${mobileSearchOpened ? 'search-mbl-open' : ''}`} >
+                        <div className="cross-btn" onClick={toggleMobileSearchTriggered}>
+                            <span className="material-icons">clear</span>
+                        </div>
+                        <TextInput endIcon="search"
+                            onValueChange={onSearchTextChange}
+                            inputValue={searchText}
+                            onClick={onSearch}
+                            onEnterPressed={onSearch}
+                        />
+                        <BreedSelect />
+                    </div>
                 </div>
             </div>
         </div>
