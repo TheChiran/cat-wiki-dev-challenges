@@ -6,15 +6,36 @@ import TextInput from "../../../../components/TextInput/Index";
 import "./banner.scss";
 import { useState } from "react";
 import BreedSelect from "../../../../components/BreedSelect/Index";
+import catApi from "../../../../apis/cat-api";
+
+interface Cat {
+    name?: string;
+};
 
 export default function HomeBanner() {
+    const [dataLoading, setDataLoading] = useState<boolean>();
+
     const [searchText, setSearchText] = useState<string | undefined>();
     const onSearchTextChange = (value: string) => {
         setSearchText(value);
     }
 
-    const onSearch = () => {
-        console.log('search called with search value: ', searchText);
+    const onSearch = async () => {
+        setDataLoading(true);
+        try {
+            const result = await catApi.get<Cat[]>(`/breeds/search?name=${(searchText as string).toLocaleLowerCase()}`);
+
+            if (result.data.length === 0) {
+                alert('We found no result');
+                setCatBreedList([]);
+                return;
+            }
+            setCatBreedList(result.data);
+            setDataLoading(false);
+        } catch (error) {
+            console.log('error: ', error);
+            setDataLoading(false);
+        }
     };
 
     const [mobileSearchOpened, setMobileSearchOpened] = useState<boolean>(false);
@@ -22,6 +43,8 @@ export default function HomeBanner() {
     const toggleMobileSearchTriggered = () => {
         setMobileSearchOpened(!mobileSearchOpened);
     };
+
+    const [catBreedList, setCatBreedList] = useState<Cat[]>([]);
 
     return (
         <div className="home-banner">
@@ -45,7 +68,7 @@ export default function HomeBanner() {
                             onClick={onSearch}
                             onEnterPressed={onSearch}
                         />
-                        <BreedSelect />
+                        {catBreedList.length > 0 && <BreedSelect items={catBreedList} is_loading={dataLoading} />}
                     </div>
                     <div className={`search__mobile ${mobileSearchOpened ? 'search-mbl-open' : ''}`} >
                         <div className="cross-btn" onClick={toggleMobileSearchTriggered}>
@@ -57,7 +80,7 @@ export default function HomeBanner() {
                             onClick={onSearch}
                             onEnterPressed={onSearch}
                         />
-                        <BreedSelect />
+                        {catBreedList.length > 0 && <BreedSelect items={catBreedList} is_loading={dataLoading} />}
                     </div>
                 </div>
             </div>

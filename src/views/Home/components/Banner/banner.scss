@@ -124,6 +124,8 @@
                 .cat-bred-select {
                     padding-left: 0;
                     padding-top: 0;
+                    max-height: calc(100vh - 200px);
+                    box-shadow: unset !important;
 
                     .cat-breed-select-list {
                         max-height: 100%;
