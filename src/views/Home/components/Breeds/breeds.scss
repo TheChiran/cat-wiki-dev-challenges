@@ -1,0 +1,74 @@
+.breed-list {
+    background: #E3E1DC;
+    padding: 40px 108px 100px 108px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 36px;
+    margin-bottom: 100px;
+
+    &__title {
+        font-size: 18px;
+        line-height: 20px;
+        font-weight: 500;
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        color: #291507;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background-color: #291507;
+            bottom: -8px;
+            left: 0;
+        }
+    }
+
+    &__breeds {
+        display: flex;
+        flex-direction: column;
+        row-gap: 46px;
+
+        .title {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .more {
+                display: flex;
+                align-items: center;
+                column-gap: 10px;
+                margin: 0;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 20px;
+                color: #29150799;
+                cursor: pointer;
+
+                .material-icons {
+                    color: #29150799;
+                }
+            }
+
+            .total-breed {
+                font-size: 48px;
+                font-weight: 700;
+                line-height: 60px;
+                color: #291507;
+                width: 50%;
+                margin: 0;
+            }
+        }
+
+        .top-breeds {
+            display: flex;
+            column-gap: 50px;
+        }
+    }
+}
