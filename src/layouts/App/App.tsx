@@ -4,6 +4,7 @@ import Footer from '../../components/Footer/Index';
 import Header from '../../components/Header/Index';
 import BreedDetail from '../../views/BreedDetail/Index';
 import Home from '../../views/Home/Index';
+import TopSearch from '../../views/TopSearch/Index';
 
 import './App.css'
 
@@ -19,6 +20,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path='/breed/:id' element={<BreedDetail />} />
+              <Route path='/top-search' element={<TopSearch />} />
             </Routes>
           </div>
         </div>
