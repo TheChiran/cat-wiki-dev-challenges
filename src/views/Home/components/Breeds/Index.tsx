@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Breed from "../../../../components/Breed/Index";
 import "./breeds.scss";
 
@@ -14,13 +15,15 @@ const breedsImageList: BreedImage[] = [
 ]
 
 export default function Breeds() {
+    const navigate = useNavigate();
+
     return (
         <div className="breed-list">
             <h2 className="breed-list__title">Most Searched Breeds</h2>
             <div className="breed-list__breeds">
                 <div className="title">
                     <h2 className="total-breed">66+ Breeds For you to discover</h2>
-                    <h3 className="more">See More <span className="material-icons">arrow_right_alt</span></h3>
+                    <h3 className="more" onClick={() => navigate('/top-search')}>See More <span className="material-icons">arrow_right_alt</span></h3>
                 </div>
                 <div className="top-breeds">
                     {breedsImageList?.map(({ name, url }: BreedImage, index) => {

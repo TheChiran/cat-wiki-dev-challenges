@@ -1,11 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import logoWhite from "./../../assets/CatwikiLogo-white.svg";
 import "./footer.scss";
 
 export default function Footer() {
+    const navigate = useNavigate();
     return (
         <footer>
             <div className="logo">
-                <img src={logoWhite} alt="Cat Wiki logo white variant" />
+                <img src={logoWhite} alt="Cat Wiki logo white variant" onClick={() => navigate('/')} />
             </div>
             <div className="author-wrapper">
                 <h2>
