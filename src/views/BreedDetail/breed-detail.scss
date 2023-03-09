@@ -1,0 +1,122 @@
+.breed-detail {
+    margin-top: 40px;
+    margin-bottom: 170px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 80px;
+
+    .breed-information {
+        display: flex;
+        column-gap: 100px;
+
+        &__image {
+            width: calc(30% - 100px);
+        }
+
+        &__details {
+            width: calc(70% - 100px);
+            display: flex;
+            flex-direction: column;
+            row-gap: 25px;
+
+            .name {
+                margin: 0;
+                font-size: 36px;
+                font-weight: 600;
+                line-height: 40px;
+                color: #291507;
+            }
+
+            .description {
+                margin: 0;
+                font-size: 18px;
+                line-height: 22px;
+                font-weight: 500;
+                color: #291507;
+            }
+
+            .general {
+                font-size: 16px;
+                line-height: 20px;
+                color: #000;
+                font-weight: 500;
+                margin: 0;
+
+                span {
+                    font-weight: 700 !important;
+                }
+            }
+
+            .detailed-list {
+                display: flex;
+                flex-direction: column;
+                row-gap: 30px;
+
+                .detailed {
+                    display: flex;
+                    column-gap: 20px;
+                    align-items: center;
+
+                    h2 {
+                        margin: 0;
+                        font-size: 16px;
+                        line-height: 20px;
+                        font-weight: 700;
+                        color: #000;
+                        width: 150px;
+                    }
+
+                    .ratings {
+                        display: flex;
+                        column-gap: 10px;
+
+                        .rating {
+                            width: 60px;
+                            height: 12px;
+                            border-radius: 8px;
+                        }
+
+                        .rating-active {
+                            background: #544439;
+                        }
+
+                        .rating-inactive {
+                            background: #E0E0E0;
+                            ;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .related-images {
+        display: flex;
+        flex-direction: column;
+        row-gap: 40px;
+
+        &__title {
+            margin: 0;
+            font-size: 36px;
+            line-height: 40px;
+            color: #291507;
+        }
+
+        &__image-list {
+            display: flex;
+            column-gap: 46px;
+            row-gap: 50px;
+            flex-wrap: wrap;
+
+            .image {
+                width: calc(25% - 46px);
+
+                img {
+                    width: 100%;
+                    height: 280px;
+                    border-radius: 24px;
+                }
+            }
+        }
+    }
+}
