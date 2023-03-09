@@ -2,20 +2,25 @@
     display: flex;
     flex-direction: column;
     row-gap: 20px;
+    width: calc(33% - 50px);
 
     .image-wrapper {
         position: relative;
-        width: 220px;
-        height: 220px;
+        // width: 220px;
+        // height: 220px;
         border-radius: 24px;
 
         img {
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: relative;
+            // top: 0;
+            // left: 0;
             width: 100%;
-            height: 100%;
+            height: 350px;
             border-radius: 24px;
+
+            @media(max-width: 1440px) {
+                height: 250px;
+            }
         }
     }
 
@@ -35,7 +40,7 @@
         content: "";
         position: absolute;
         width: 50px;
-        height: 174px;
+        height: calc(100% - 46px);
         background: #DEC68B;
         left: -10px;
         top: 30px;
