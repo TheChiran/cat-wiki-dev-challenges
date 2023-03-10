@@ -4,37 +4,45 @@ import logo from "./../../../../assets/CatwikiLogo-white.svg";
 import TextInput from "../../../../components/TextInput/Index";
 
 import "./banner.scss";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BreedSelect from "../../../../components/BreedSelect/Index";
 import catApi from "../../../../apis/cat-api";
+import { useNavigate } from "react-router-dom";
 
 interface Cat {
     name?: string;
 };
 
 export default function HomeBanner() {
-    const [dataLoading, setDataLoading] = useState<boolean>();
+    const selectRef = useRef<any>(null);
+    const selectRefMbl = useRef<any>(null);
+    const [dataLoading, setDataLoading] = useState<boolean>(false);
+    const [clickedOutsideSearch, setClickedOutsideSearch] = useState<boolean>(false);
+    const navigate = useNavigate();
 
-    const [searchText, setSearchText] = useState<string | undefined>();
+    const [searchText, setSearchText] = useState<string | undefined>('');
     const onSearchTextChange = (value: string) => {
         setSearchText(value);
     }
 
     const onSearch = async () => {
         setDataLoading(true);
-        try {
-            const result = await catApi.get<Cat[]>(`/breeds/search?name=${(searchText as string).toLocaleLowerCase()}`);
+        if (searchText !== '') {
+            try {
+                const result = await catApi.get<Cat[]>(`/breeds/search?name=${(searchText as string).toLocaleLowerCase()}`);
 
-            if (result.data.length === 0) {
-                alert('We found no result');
-                setCatBreedList([]);
-                return;
+                if (result.data.length === 0) {
+                    alert('We found no result');
+                    setCatBreedList([]);
+                    setDataLoading(false);
+                    return;
+                }
+                setCatBreedList(result.data);
+                setDataLoading(false);
+            } catch (error) {
+                console.log('error: ', error);
+                setDataLoading(false);
             }
-            setCatBreedList(result.data);
-            setDataLoading(false);
-        } catch (error) {
-            console.log('error: ', error);
-            setDataLoading(false);
         }
     };
 
@@ -45,6 +53,33 @@ export default function HomeBanner() {
     };
 
     const [catBreedList, setCatBreedList] = useState<Cat[]>([]);
+
+    const selectOption = (id: string) => {
+        navigate(`/breed/${id}`);
+    };
+
+    useEffect(() => {
+        function handleClickSearchOutside(event: any) {
+            const body = window.screen;
+
+            if (body.width > 425 && selectRef.current && !selectRef?.current?.contains(event.target)) {
+                setClickedOutsideSearch(true);
+                return;
+            }
+
+            if (body.width <= 425 && selectRefMbl.current && !selectRefMbl?.current?.contains(event.target)) {
+                setClickedOutsideSearch(true);
+                return;
+            }
+
+            setClickedOutsideSearch(false);
+        };
+
+        document.addEventListener("mousedown", handleClickSearchOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickSearchOutside)
+        };
+    }, [selectRef]);
 
     return (
         <div className="home-banner">
@@ -61,26 +96,30 @@ export default function HomeBanner() {
                         <h2 className="title">Search</h2>
                         <div className="material-icons">search</div>
                     </div>
-                    <div className="search__desktop">
+                    <div className="search__desktop" ref={selectRef}>
                         <TextInput endIcon="search"
                             onValueChange={onSearchTextChange}
                             inputValue={searchText}
                             onClick={onSearch}
                             onEnterPressed={onSearch}
+                            isLoading={dataLoading}
                         />
-                        {catBreedList.length > 0 && <BreedSelect items={catBreedList} is_loading={dataLoading} />}
+                        {!clickedOutsideSearch && catBreedList.length > 0 && <BreedSelect items={catBreedList} is_loading={dataLoading} onSelect={selectOption} />}
                     </div>
                     <div className={`search__mobile ${mobileSearchOpened ? 'search-mbl-open' : ''}`} >
                         <div className="cross-btn" onClick={toggleMobileSearchTriggered}>
                             <span className="material-icons">clear</span>
                         </div>
-                        <TextInput endIcon="search"
-                            onValueChange={onSearchTextChange}
-                            inputValue={searchText}
-                            onClick={onSearch}
-                            onEnterPressed={onSearch}
-                        />
-                        {catBreedList.length > 0 && <BreedSelect items={catBreedList} is_loading={dataLoading} />}
+                        <div className="search-input-mbl" ref={selectRefMbl}>
+                            <TextInput endIcon="search"
+                                onValueChange={onSearchTextChange}
+                                inputValue={searchText}
+                                onClick={onSearch}
+                                onEnterPressed={onSearch}
+                                isLoading={dataLoading}
+                            />
+                            {!clickedOutsideSearch && catBreedList.length > 0 && <BreedSelect items={catBreedList} is_loading={dataLoading} onSelect={selectOption} />}
+                        </div>
                     </div>
                 </div>
             </div>
