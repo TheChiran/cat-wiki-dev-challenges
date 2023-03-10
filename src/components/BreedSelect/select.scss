@@ -6,7 +6,7 @@ $bgColor: #FFFFFF;
     padding: 30px 20px;
     width: calc(400px - 40px);
     box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-    min-height: 220px;
+    min-height: fit-content;
 
     .cat-breed-select-list {
         max-height: 220px;

@@ -3,18 +3,19 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 interface SelectItem {
     name: string;
+    id: string;
 };
 
 type SelectProps = {
     items: any[];
     bindValue?: any;
-    onSelect?: () => {};
+    onSelect?: (id: string) => void;
     is_loading?: boolean;
 }
 
 const demoData = ['American Bobtail', 'American Curl', 'American Shorthair', 'American Wirehair', 'American Shorthair', 'American Wirehair'];
 
-export default function BreedSelect({ items, is_loading }: SelectProps) {
+export default function BreedSelect({ items, is_loading, onSelect = (id: string) => { } }: SelectProps) {
     return (
         <div className="cat-bred-select">
             {is_loading && <center><CircularProgress /></center>}
@@ -22,7 +23,7 @@ export default function BreedSelect({ items, is_loading }: SelectProps) {
                 {!is_loading &&
                     items?.map((item: SelectItem) => {
                         return (
-                            <div className="cat-bred-select__option">
+                            <div className="cat-bred-select__option" onClick={() => onSelect(item.id as string)}>
                                 {item.name}
                             </div>
                         )
