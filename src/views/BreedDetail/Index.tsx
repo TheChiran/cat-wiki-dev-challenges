@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import catApi from "../../apis/cat-api";
 import Breed from "../../components/Breed/Index";
+import BreedDetailSkeleton from "../../components/Skeletons/BreedDetail/Index";
 import Transitions from "../../components/Transitions/Index";
 import "./breed-detail.scss";
 
@@ -25,16 +26,20 @@ export default function BreedDetail() {
     const { id } = useParams();
     const [breedImage, setBreedImage] = useState<string>();
     const [breed, setBreed] = useState<Breed>();
-    const [isLoading, setLoading] = useState<boolean | null>(null);
+    const [isLoading, setLoading] = useState<boolean | null>(false);
 
     useEffect(() => {
         const callBreedAPI = async () => {
+            setLoading(true);
             const response = await catApi.get(`/images/search?breed_id=${id}`);
             setBreedImage(response.data[0].url);
             setBreed(response.data[0].breeds[0] as Breed);
+            setLoading(false);
         };
         callBreedAPI();
     }, [id]);
+
+    if (isLoading) return <BreedDetailSkeleton />;
 
     return (
         <Transitions>
