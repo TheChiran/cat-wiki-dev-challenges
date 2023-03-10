@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import catApi from "../../apis/cat-api";
+import TopSearchSkeleton from "../../components/Skeletons/TopSearch/Index";
 import Transitions from "../../components/Transitions/Index";
 import "./top-search.scss";
 
@@ -10,9 +11,11 @@ export default function TopSearch() {
     const [otherBreeds, setOtherBreeds] = useState<any>([]);
     const [loadMoreLoading, setLoadMoreLoading] = useState<boolean>(false);
     const [loadMoreText, setLoadMoreLoadingText] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const callTopTenSearched = async () => {
+            setLoading(true);
             const result = await catApi.get(`/images/search?limit=10&page=1&has_breeds=1`);
             setTopSearched(result.data);
         };
@@ -28,6 +31,7 @@ export default function TopSearch() {
             }
             const updatedData = otherBreeds.concat(result.data);
             setOtherBreeds(updatedData);
+            setLoading(false);
             setLoadMoreLoading(false);
         };
         callOtherBreedsAPI();
@@ -37,6 +41,10 @@ export default function TopSearch() {
         setLoadMoreLoading(true);
         setCurrentPage(currentPage + 1);
     };
+
+    if (loading) return (
+        <TopSearchSkeleton />
+    );
 
     return (
         <Transitions>
