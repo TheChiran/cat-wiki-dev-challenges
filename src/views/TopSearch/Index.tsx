@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import catApi from "../../apis/cat-api";
+import Transitions from "../../components/Transitions/Index";
 import "./top-search.scss";
 
 export default function TopSearch() {
@@ -38,49 +39,51 @@ export default function TopSearch() {
     };
 
     return (
-        <div className="top-searches">
-            <div className="top-search">
-                <h2 className="top-search__title">Top 10 most searched breeds</h2>
-                <div className="top-search__breeds">
-                    {topSearched?.map((breed: any, index: number) => {
-                        return (
-                            <div className="breed">
-                                <div className="image">
-                                    <img src={breed.url} alt={`${breed.breeds[0].name} image`} />
+        <Transitions>
+            <div className="top-searches">
+                <div className="top-search">
+                    <h2 className="top-search__title">Top 10 most searched breeds</h2>
+                    <div className="top-search__breeds">
+                        {topSearched?.map((breed: any, index: number) => {
+                            return (
+                                <div className="breed">
+                                    <div className="image">
+                                        <img src={breed.url} alt={`${breed.breeds[0].name} image`} />
+                                    </div>
+                                    <div className="breed__content">
+                                        <h2 className="title">{index + 1}. {breed.breeds[0].name}</h2>
+                                        <h3 className="description">{breed.breeds[0].description}</h3>
+                                        <Link to={`/breed/${breed?.breeds[0]?.id}`} className='know-more'>Read More <span className="material-icons">arrow_right_alt</span></Link>
+                                    </div>
                                 </div>
-                                <div className="breed__content">
-                                    <h2 className="title">{index + 1}. {breed.breeds[0].name}</h2>
-                                    <h3 className="description">{breed.breeds[0].description}</h3>
-                                    <Link to={`/breed/${breed?.breeds[0]?.id}`} className='know-more'>Read More <span className="material-icons">arrow_right_alt</span></Link>
-                                </div>
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
-
-            <div className="others">
-                <h2 className="others__title">Other searched breeds</h2>
-                <div className="others__breeds">
-                    {otherBreeds?.map((breed: any, index: number) => {
-                        return (
-                            <div className="breed">
-                                <div className="image">
-                                    <img src={breed.url} alt={`${breed?.breeds[0]?.name} image`} />
-                                </div>
-                                <div className="breed__content">
-                                    <h2 className="title">{index + 11}. {breed?.breeds[0]?.name}</h2>
-                                    <h3 className="description">{breed?.breeds[0]?.description}</h3>
-                                    <Link to={`/breed/${breed?.breeds[0]?.id}`} className='know-more'>Read More <span className="material-icons">arrow_right_alt</span></Link>
-                                </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
+                    </div>
                 </div>
 
+                <div className="others">
+                    <h2 className="others__title">Other searched breeds</h2>
+                    <div className="others__breeds">
+                        {otherBreeds?.map((breed: any, index: number) => {
+                            return (
+                                <div className="breed">
+                                    <div className="image">
+                                        <img src={breed.url} alt={`${breed?.breeds[0]?.name} image`} />
+                                    </div>
+                                    <div className="breed__content">
+                                        <h2 className="title">{index + 11}. {breed?.breeds[0]?.name}</h2>
+                                        <h3 className="description">{breed?.breeds[0]?.description}</h3>
+                                        <Link to={`/breed/${breed?.breeds[0]?.id}`} className='know-more'>Read More <span className="material-icons">arrow_right_alt</span></Link>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
 
-                {loadMoreText !== '' ? <p>{loadMoreText}</p> : loadMoreLoading ? 'Loading Data' : <button onClick={loadMore} className="load-more">Load More <span className="material-icons">refresh</span></button>}
+
+                    {loadMoreText !== '' ? <p>{loadMoreText}</p> : loadMoreLoading ? 'Loading Data' : <button onClick={loadMore} className="load-more">Load More <span className="material-icons">refresh</span></button>}
+                </div>
             </div>
-        </div>
+        </Transitions>
     )
 }
