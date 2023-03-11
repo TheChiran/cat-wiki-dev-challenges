@@ -45,11 +45,43 @@
             img {
                 width: 250px;
                 height: 90px;
+
+                @media(max-width: 991px) {
+                    width: 150px;
+                    height: 45px;
+                }
             }
         }
 
         @media(max-width: 1024px) {
             top: 20px;
+        }
+
+        @media(max-width: 991px) {
+            .title {
+                font-size: 20px;
+            }
+
+            .search {
+                margin-top: 25px !important;
+
+                &__desktop {
+                    .text-input {
+                        padding: 12px 14px !important;
+                        max-width: 250px;
+
+                        input {
+                            &::placeholder {
+                                font-size: 18px !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @media(max-width: 768px) {
+            left: 20px;
         }
 
         @media(max-width: 425px) {
