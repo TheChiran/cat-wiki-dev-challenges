@@ -49,6 +49,7 @@ export default function TextInput({ placeholder = 'Enter search text', startIcon
     const handleKeyUp = (event: KeyboardEvent | Event) => {
         if ((event as KeyboardEvent).key === 'Enter') {
             onEnterPressed();
+            return;
         }
         else {
             onValueChange((event.target as HTMLInputElement).value);
@@ -62,7 +63,7 @@ export default function TextInput({ placeholder = 'Enter search text', startIcon
                     {isStartIconImage ? <img src={startIcon} /> : isLoading ? <CircularProgress size={"20px"} /> : startIcon}
                 </span>
             }
-            <input type={type} placeholder={placeholder} onKeyUp={handleKeyUp} value={inputValue} />
+            <input type={type} placeholder={placeholder} onKeyUp={handleKeyUp} value={inputValue} onChange={(event) => onValueChange((event.target as HTMLInputElement).value)} />
             {endIcon !== '' &&
                 <span className={endIconClass} onClick={onClick}>
                     {isEndIconImage ? <img src={endIcon} /> : isLoading ? <CircularProgress size={"20px"} /> : endIcon}
