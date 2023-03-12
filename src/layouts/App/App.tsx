@@ -9,9 +9,18 @@ import TopSearch from '../../views/TopSearch/Index';
 import { AnimatePresence } from 'framer-motion';
 
 import './App.css'
+import { useEffect } from 'react';
 
 function App() {
-  const location = useLocation();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, [pathname]);
+
   return (
     <div className="App">
       <div className="main-layout">
@@ -21,7 +30,7 @@ function App() {
         <div className="content-section">
           <div className="main-content">
             <AnimatePresence mode='wait'>
-              <Routes location={location} key={location.pathname}>
+              <Routes location={location} key={pathname}>
                 <Route path="/" element={<Home />} />
                 <Route path='/breed/:id' element={<BreedDetail />} />
                 <Route path='/top-search' element={<TopSearch />} />
