@@ -20,4 +20,17 @@
         animation: 1.5s shine linear infinite;
         height: 600px;
     }
+
+    @media(max-width: 1024px) {
+        column-gap: 50px;
+    }
+
+    @media(max-width: 500px) {
+        flex-direction: column;
+        row-gap: 20px;
+
+        &__contents {
+            width: 100%;
+        }
+    }
 }
